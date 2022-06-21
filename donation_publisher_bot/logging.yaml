@@ -1,0 +1,19 @@
+version: 1
+formatters:
+  default:
+    format: '%(asctime)s - %(levelname)s - %(name)s - %(funcName)s: %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+handlers:
+  default:
+    class: logging.FileHandler
+    filename: donation_publisher_bot.log
+    formatter: default
+    level: INFO
+  debug:
+    class: logging.StreamHandler
+    formatter: default
+    level: DEBUG
+loggers:
+  main:
+    handlers: [ default ]
+    level: INFO

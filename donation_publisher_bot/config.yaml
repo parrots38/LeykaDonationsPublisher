@@ -1,0 +1,13 @@
+bot:
+  name: yourBotUsernameWithout@
+  token: yourBotToken
+  admin_id: BotAdministatorID  # this user can execute /footer and /header commands.
+database:
+  donations:  # WordPress' DB
+    user: yourDBUsername
+    password: yourDBPassword
+    host: yourDBHostname
+    database: yourDBName
+    raise_on_warnings: True
+  data:  # SQLite DB
+    db_name: bot_data.db
