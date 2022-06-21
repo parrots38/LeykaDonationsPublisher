@@ -96,22 +96,23 @@ class Bot:
                     log.info("Handling update: new message = [%s].", message.text)
                     if sender_id == str(self._admin_id):
                         match = re.match(Bot.ADMIN_COMMAND, message.text, re.IGNORECASE | re.DOTALL)
-                        if match.group(1) == "header":
-                            header = match.group(2)
-                            log.info("Adding header [%s] to DB.", header)
-                            self._db_client.set_header(header)
-                            self.send_message([sender_id],
-                                              f"Header added. Info message is looking like:\n{_get_info_message()}")
-                            return
-                        elif match.group(1) == "footer":
-                            footer = match.group(2)
-                            log.info("Adding footer [%s] to DB.", footer)
-                            self._db_client.set_footer(footer)
-                            self.send_message([sender_id],
-                                              f"Footer added. Info message is looking like:\n{_get_info_message()}")
-                            return
-                        elif match.group(1) == "run":
-                            pass
+                        if match:
+                            if match.group(1) == "header":
+                                header = match.group(2)
+                                log.info("Adding header [%s] to DB.", header)
+                                self._db_client.set_header(header)
+                                self.send_message([sender_id],
+                                                  f"Header added. Info message is looking like:\n{_get_info_message()}")
+                                return
+                            elif match.group(1) == "footer":
+                                footer = match.group(2)
+                                log.info("Adding footer [%s] to DB.", footer)
+                                self._db_client.set_footer(footer)
+                                self.send_message([sender_id],
+                                                  f"Footer added. Info message is looking like:\n{_get_info_message()}")
+                                return
+                            elif match.group(1) == "run":
+                                pass
 
                     match = re.match(Bot.RUN_COMMAND, message.text, re.IGNORECASE)
                     if not match:
@@ -166,5 +167,3 @@ class Bot:
         message += footer
 
         return message
-
-
