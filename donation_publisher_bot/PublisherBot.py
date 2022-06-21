@@ -2,7 +2,6 @@ import time
 from datetime import datetime
 import re
 import logging.config
-import random
 
 import telegram.error
 import telegram
@@ -18,8 +17,6 @@ class Bot:
     ADMIN_COMMAND = r"\s*?/(header|footer|run)\s*(?=\w|@)(.*)(?<=\w)"  # /run or /footer or /header
     PRIVATE_MESSAGE = r"^[0-9]+$"
     DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
-    FUNNY_BALLS = ["Умный Лосяш", "Трудолюбивый Копатыч", "Задорный Крош", "Изобретательный Пин", "Мудрый Кар-Карыч",
-                   "Мечтающий Ежик", "Философствующий Бараш"]
 
     def __init__(self, token, name, admin_id, db_client, open_names):
         self._bot = telegram.Bot(token)
@@ -161,7 +158,7 @@ class Bot:
             for uid, date, _title, status, donor_name, donor_email, amount in donations:
                 if title == _title:
                     if not self._open_names:
-                        donor_name = "Некий " + random.choice(self.FUNNY_BALLS)
+                        donor_name = "Сторонник"
                     donation_info_message = f'- "{donor_name}" пожертвовал {amount}\n'
                     if len(message) + len(footer) + len(donation_info_message) < 4096:
                         message += donation_info_message
